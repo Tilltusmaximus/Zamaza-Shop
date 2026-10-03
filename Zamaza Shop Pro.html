@@ -1,0 +1,387 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Zamaza Shop Pro</title>
+<style>
+  /* Fake copycat — HARD mode. Subtle tells only; looks legitimate at a glance. */
+  :root {
+    --bg:#eaeded; --panel:#ffffff; --ink:#0f1111; --muted:#565959; --line:#d5d9d9;
+    --zama:#ff9900; --zama-dark:#febd69; --navy:#131921; --navy2:#232f3e;
+    --go:#007600; --link:#007185; --stop:#c7001e;
+    --shadow:0 2px 8px rgba(15,17,17,.12);
+    --dspl:"Poppins", system-ui, sans-serif; --body:"Inter", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#0e1319; --panel:#171f28; --ink:#eef2f4; --muted:#9fb0bb; --line:#2a3642;
+    --go:#4cc46a; --link:#45c6d6; --stop:#ff5a72; --shadow:0 2px 10px rgba(0,0,0,.45); color-scheme:dark; }}
+  :root[data-theme="dark"]{
+    --bg:#0e1319; --panel:#171f28; --ink:#eef2f4; --muted:#9fb0bb; --line:#2a3642;
+    --go:#4cc46a; --link:#45c6d6; --stop:#ff5a72; --shadow:0 2px 10px rgba(0,0,0,.45); color-scheme:dark; }
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5; }
+  h1,h2,h3{ font-family:var(--dspl); margin:0; text-wrap:balance; }
+  a{ color:var(--link); text-decoration:none; }
+  button{ font-family:var(--body); cursor:pointer; }
+
+  /* HARD TELL 1: lock looks fine; domain is a lookalike (rn instead of m, .shop TLD) */
+  .urlbar{ background:#0b1016; color:#aeb8c0; font-size:.78rem; padding:6px 14px; display:flex; align-items:center; gap:8px; }
+  .urlbar b{ color:#fff; font-weight:600; } .urlbar .lk{ color:#2ec27e; }
+
+  .nav{ background:var(--navy); color:#fff; display:flex; align-items:center; gap:14px; padding:9px 14px; flex-wrap:wrap; }
+  .logo{ font-family:var(--dspl); font-weight:800; font-size:1.35rem; letter-spacing:-.02em; white-space:nowrap; }
+  .logo .o{ color:var(--zama); } .logo .s{ color:var(--zama); }
+  .search{ flex:1; min-width:150px; display:flex; height:38px; border-radius:7px; overflow:hidden; }
+  .search input{ flex:1; min-width:0; border:0; padding:0 12px; font-size:.9rem; }
+  .search button{ border:0; background:var(--zama-dark); color:var(--navy); font-weight:700; padding:0 16px; }
+  .navbtn{ color:#fff; font-size:.78rem; line-height:1.15; background:none; border:0; text-align:left; padding:4px 6px; border-radius:4px; }
+  .navbtn b{ display:block; font-size:.9rem; }
+  .navbtn:hover{ outline:1px solid #3a4553; }
+  .cartbtn{ display:flex; align-items:center; gap:4px; font-weight:700; }
+  .cartcount{ background:var(--zama); color:var(--navy); min-width:20px; height:20px; border-radius:50%; display:inline-grid; place-items:center; font-size:.78rem; font-weight:800; }
+  .subnav{ background:var(--navy2); color:#e8ebee; font-size:.8rem; padding:5px 10px; display:flex; gap:4px; flex-wrap:wrap; }
+  .subnav button{ background:none; border:0; color:#e8ebee; font-size:.8rem; padding:4px 9px; border-radius:5px; }
+  .subnav button:hover{ outline:1px solid #3a4553; background:rgba(255,255,255,.06); }
+
+  .wrap{ max-width:1100px; margin:0 auto; padding:18px 14px 40px; }
+  .crumbs{ font-size:.8rem; color:var(--muted); margin-bottom:12px; }
+
+  .product{ display:grid; grid-template-columns:340px 1fr 260px; gap:26px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px; box-shadow:var(--shadow); }
+  @media (max-width:860px){ .product{ grid-template-columns:1fr; } }
+  .gallery{ min-width:0; }
+  .shot{ background:#fff; border:1px solid var(--line); border-radius:10px; aspect-ratio:1/1; display:grid; place-items:center; max-width:100%; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .shot{ background:#0f1620; } .search input{ background:#0f1620; color:var(--ink);} }
+  :root[data-theme="dark"] .shot{ background:#0f1620; } :root[data-theme="dark"] .search input{ background:#0f1620; color:var(--ink);}
+  .shot svg{ width:76%; height:76%; }
+  .thumbs{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .thumbs button{ width:52px; height:52px; border:1px solid var(--line); border-radius:7px; background:var(--panel); display:grid; place-items:center; padding:4px; }
+  .thumbs button.sel{ border-color:var(--zama); outline:1px solid var(--zama); }
+  .thumbs svg{ width:100%; height:100%; }
+
+  .info{ min-width:0; }
+  .info h1{ font-size:1.3rem; line-height:1.3; }
+  .byline{ font-size:.86rem; margin:7px 0 6px; }
+  .rating{ display:flex; align-items:center; gap:8px; font-size:.85rem; flex-wrap:wrap; }
+  .stars{ color:var(--zama); letter-spacing:1px; }
+  .rating button{ background:none; border:0; color:var(--link); font-weight:600; padding:0; text-decoration:underline; font-size:.85rem; }
+  .hr{ height:1px; background:var(--line); margin:14px 0; }
+  .feat{ font-size:.88rem; padding-left:18px; margin:0; display:flex; flex-direction:column; gap:5px; }
+
+  .buybox{ border:1px solid var(--line); border-radius:12px; padding:16px; height:fit-content; display:flex; flex-direction:column; gap:10px; }
+  .price{ font-family:var(--dspl); font-weight:700; }
+  .price .sym{ font-size:1rem; vertical-align:top; } .price .big{ font-size:2rem; }
+  .stock{ color:var(--go); font-weight:700; font-size:.95rem; }
+  .ship{ font-size:.82rem; color:var(--muted); } .ship b{ color:var(--ink); }
+  .qty{ display:flex; align-items:center; gap:8px; font-size:.85rem; }
+  .qty select{ padding:5px 8px; border-radius:7px; border:1px solid var(--line); background:var(--panel); color:var(--ink); }
+  .addcart{ background:var(--zama-dark); border:1px solid var(--zama); border-radius:999px; padding:11px; font-weight:700; color:var(--navy); }
+  .buynow{ background:var(--zama); border:1px solid #e88a00; border-radius:999px; padding:11px; font-weight:700; color:var(--navy); }
+  .secure{ font-size:.78rem; color:var(--muted); display:flex; align-items:center; gap:6px; }
+  .sellerline{ font-size:.82rem; }
+  .sellerline button{ background:none; border:0; color:var(--link); font-weight:600; padding:0; text-decoration:underline; }
+
+  .revsum{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; margin-top:20px; box-shadow:var(--shadow); }
+  .revsum h2{ font-size:1.1rem; margin-bottom:12px; }
+  .revtop{ display:flex; gap:22px; align-items:center; flex-wrap:wrap; }
+  .bigrate{ font-family:var(--dspl); font-weight:700; font-size:2.4rem; }
+  .bars{ flex:1; min-width:200px; display:flex; flex-direction:column; gap:4px; }
+  .barrow{ display:flex; align-items:center; gap:8px; font-size:.78rem; }
+  .barrow .lbl{ width:44px; color:var(--link); }
+  .track{ flex:1; height:16px; background:var(--bg); border-radius:4px; overflow:hidden; }
+  .fill{ height:100%; background:var(--zama); }
+  .barrow .pct{ width:34px; text-align:right; color:var(--muted); }
+  .showall{ margin-top:14px; background:var(--panel); border:1px solid var(--line); border-radius:999px; padding:9px 16px; font-weight:600; font-size:.85rem; color:var(--ink); }
+
+  .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(20px); background:var(--navy2); color:#fff; padding:12px 20px; border-radius:10px; font-weight:600; font-size:.9rem; box-shadow:0 8px 24px rgba(0,0,0,.3); opacity:0; transition:.3s; z-index:60; pointer-events:none; max-width:90vw; }
+  .toast.on{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.45); opacity:0; pointer-events:none; transition:.25s; z-index:40; }
+  .scrim.on{ opacity:1; pointer-events:auto; }
+  .drawer{ position:fixed; top:0; right:0; height:100%; width:min(430px,94vw); background:var(--panel); box-shadow:-6px 0 30px rgba(0,0,0,.3); transform:translateX(100%); transition:.28s; z-index:50; display:flex; flex-direction:column; }
+  .drawer.on{ transform:translateX(0); }
+  .drawer header{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line); }
+  .drawer header h3{ font-size:1.05rem; }
+  .drawer .x{ background:none; border:0; font-size:1.3rem; color:var(--muted); }
+  .drawer .body{ padding:18px; overflow:auto; display:flex; flex-direction:column; gap:14px; font-size:.88rem; }
+
+  .review{ border-bottom:1px solid var(--line); padding-bottom:13px; }
+  .review .who{ display:flex; align-items:center; gap:8px; font-size:.82rem; font-weight:600; }
+  .review .who .av{ width:26px; height:26px; border-radius:50%; background:var(--navy2); color:#fff; display:grid; place-items:center; font-size:.74rem; }
+  .review .vp{ color:var(--go); font-size:.74rem; font-weight:700; display:flex; align-items:center; gap:4px; margin:5px 0; }
+  .review .rstars{ color:var(--zama); font-size:.8rem; } .review .rt{ font-weight:700; font-size:.86rem; margin-left:6px; }
+  .review p{ margin:6px 0 0; font-size:.85rem; }
+  .review .date{ color:var(--muted); font-size:.74rem; }
+
+  .seller-head{ display:flex; align-items:center; gap:12px; }
+  .seller-badge{ width:46px; height:46px; border-radius:10px; background:var(--navy); color:var(--zama); font-family:var(--dspl); font-weight:800; display:grid; place-items:center; font-size:1.1rem; }
+  .seller-head b{ font-size:1.02rem; } .seller-head span{ color:var(--muted); font-size:.8rem; }
+  .verif{ display:inline-flex; align-items:center; gap:5px; background:#e7f5ee; color:var(--go); font-size:.76rem; font-weight:700; padding:3px 9px; border-radius:999px; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .verif{ background:#16301f; } }
+  :root[data-theme="dark"] .verif{ background:#16301f; }
+  .detail-row{ display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--line); }
+  .detail-row span:first-child{ color:var(--muted); } .detail-row span:last-child{ text-align:right; }
+
+  .steps{ display:flex; gap:6px; font-size:.74rem; color:var(--muted); margin-bottom:4px; }
+  .steps b{ color:var(--zama); }
+  .field{ display:flex; flex-direction:column; gap:5px; }
+  .field label{ font-size:.82rem; font-weight:600; }
+  .field input,.field select{ padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:.9rem; background:var(--panel); color:var(--ink); }
+  .field input:focus{ outline:2px solid var(--zama); border-color:var(--zama); }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .primary{ background:var(--zama); border:1px solid #e88a00; border-radius:8px; padding:11px; font-weight:700; color:var(--navy); }
+  .summ{ background:var(--bg); border-radius:8px; padding:12px; font-size:.84rem; display:flex; flex-direction:column; gap:6px; }
+  .summ .tot{ display:flex; justify-content:space-between; font-weight:700; font-family:var(--dspl); }
+  .paybadge{ display:flex; gap:6px; align-items:center; font-size:.76rem; color:var(--muted); }
+  .okmsg{ background:#e7f5ee; color:var(--go); border:1px solid #bfe3cd; border-radius:8px; padding:12px; font-size:.86rem; font-weight:600; text-align:center; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .okmsg{ background:#16301f; border-color:#285c3a; } .summ{ background:#0f1620;} }
+  :root[data-theme="dark"] .okmsg{ background:#16301f; border-color:#285c3a; } :root[data-theme="dark"] .summ{ background:#0f1620; }
+  .mini{ font-size:.76rem; color:var(--muted); }
+  .cartitem,.order{ border:1px solid var(--line); border-radius:10px; padding:12px; display:flex; flex-direction:column; gap:10px; }
+  .cartctrl{ display:flex; align-items:center; gap:8px; }
+  .qbtn{ width:30px; height:30px; border:1px solid var(--line); border-radius:7px; background:var(--panel); color:var(--ink); font-size:1.1rem; line-height:1; }
+  .qnum{ min-width:28px; text-align:center; font-weight:700; font-family:var(--dspl); }
+  .remove{ margin-left:auto; background:none; border:0; color:var(--link); font-size:.82rem; text-decoration:underline; }
+  .orderbtns{ display:flex; gap:8px; flex-wrap:wrap; }
+  .obtn{ border:1px solid var(--zama); background:var(--zama-dark); color:var(--navy); border-radius:999px; padding:8px 14px; font-weight:700; font-size:.82rem; }
+  .obtn.ghost{ background:var(--panel); color:var(--ink); border-color:var(--line); }
+  .legal h4{ font-family:var(--dspl); font-size:.92rem; margin:10px 0 2px; }
+  .legal p{ margin:0; font-size:.84rem; } .legal .mini{ margin-top:2px; }
+
+  .footer{ background:var(--navy2); color:#cdd4da; text-align:center; font-size:.76rem; padding:18px; }
+  .footer a{ color:#cdd4da; } .footlinks{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:8px; }
+  .footlinks button{ background:none; border:0; color:#cdd4da; font-size:.76rem; text-decoration:underline; padding:2px 4px; }
+  .footlinks button:hover{ color:#fff; }
+</style>
+
+<!-- HARD TELL 1: lock present, but domain is a lookalike: "zarnaza" (r+n) on a .shop TLD -->
+<div class="urlbar"><span class="lk">🔒</span><span><b>https://www.zarnaza.shop</b>/SoundWave-X9/dp/B0CX9</span></div>
+
+<div class="nav">
+  <div class="logo">zam<span class="o">a</span>za<span class="s">⌣</span></div>
+  <div class="search"><input value="kabellose kopfhörer" aria-label="Suche"><button>🔍</button></div>
+  <button class="navbtn" id="loginNav">Hallo, Anmelden<b>Konto &amp; Listen ▾</b></button>
+  <button class="navbtn" id="ordersNav">Retouren<b>&amp; Bestellungen</b></button>
+  <button class="navbtn cartbtn" id="cartNav"><span style="font-size:1.3rem">🛒</span><span class="cartcount" id="cc">0</span></button>
+</div>
+<div class="subnav" id="subnav"><button data-k="alle">Alle</button><button data-k="angebote">Angebote</button><button data-k="elektronik">Elektronik</button><button data-k="basics">Zamaza Basics</button><button data-k="service">Kundenservice</button><button data-k="prime">Prime</button></div>
+
+<div class="wrap">
+  <div class="crumbs">Elektronik › Kopfhörer › Over-Ear › SoundWave X9</div>
+
+  <div class="product">
+    <div class="gallery">
+      <div class="shot" id="mainShot"></div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+
+    <div class="info">
+      <h1>SoundWave X9 Kabellose Over-Ear Kopfhörer mit Active Noise Cancelling, 40 Std. Akku</h1>
+      <div class="byline">Marke: <a href="#">Zamaza Basics</a></div>
+      <div class="rating"><span class="stars">★★★★★</span> 4,9 <button id="revLink">6.512 Bewertungen</button></div>
+      <div class="hr"></div>
+      <ul class="feat">
+        <li>Aktive Geräuschunterdrückung bis −32 dB</li>
+        <li>Bis zu 40 Stunden Akkulaufzeit, USB-C Schnellladung</li>
+        <li>Bluetooth 5.3, Multipoint für 2 Geräte</li>
+        <li>Gewicht 248 g, faltbar mit Transporttasche</li>
+      </ul>
+    </div>
+
+    <div class="buybox">
+      <!-- HARD TELL 2: realistic but suspiciously low price (69,99 vs 89,99) -->
+      <div class="price"><span class="sym">€</span><span class="big">69</span><span>,99</span></div>
+      <div class="ship">GRATIS Lieferung <b>morgen, 3. Okt.</b></div>
+      <div class="stock">Auf Lager</div>
+      <div class="qty">Menge:
+        <select id="qty"><option>1</option><option>2</option><option>3</option></select>
+      </div>
+      <button class="addcart" id="addCart">In den Einkaufswagen</button>
+      <button class="buynow" id="buyNow">Jetzt kaufen</button>
+      <div class="secure">🔒 Sichere Transaktion</div>
+      <div class="hr" style="margin:6px 0"></div>
+      <!-- HARD TELL 3: seller name slightly off — "Zamaza EU Ltd." (Ltd. instead of S.à r.l.) -->
+      <div class="sellerline">Verkauf durch <button id="sellerBtn">Zamaza EU Ltd.</button>, Versand durch Zamaza.</div>
+    </div>
+  </div>
+
+  <div class="revsum">
+    <h2>Kundenrezensionen</h2>
+    <div class="revtop">
+      <div style="text-align:center">
+        <div class="bigrate">4,9</div>
+        <div class="stars" style="font-size:1.1rem">★★★★★</div>
+        <div class="mini">6.512 Bewertungen</div>
+      </div>
+      <div class="bars">
+        <div class="barrow"><span class="lbl">5 ★</span><div class="track"><div class="fill" style="width:97%"></div></div><span class="pct">97%</span></div>
+        <div class="barrow"><span class="lbl">4 ★</span><div class="track"><div class="fill" style="width:2%"></div></div><span class="pct">2%</span></div>
+        <div class="barrow"><span class="lbl">3 ★</span><div class="track"><div class="fill" style="width:1%"></div></div><span class="pct">1%</span></div>
+        <div class="barrow"><span class="lbl">2 ★</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></div>
+        <div class="barrow"><span class="lbl">1 ★</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="pct">0%</span></div>
+      </div>
+    </div>
+    <button class="showall" id="revLink2">Alle 6.512 Rezensionen lesen</button>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footlinks"><button data-f="impressum">Impressum</button><button data-f="datenschutz">Datenschutzerklärung</button><button data-f="agb">AGB</button><button data-f="cookie">Cookie-Einstellungen</button><button data-f="hilfe">Hilfe</button></div>
+  © 2010–2026 Zamaza GmbH · Alle Rechte vorbehalten
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <header><h3 id="drTitle">Details</h3><button class="x" id="drClose" aria-label="Schließen">×</button></header>
+  <div class="body" id="drBody"></div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  var $=function(id){return document.getElementById(id);};
+  var cart=0, tt;
+
+  // gallery (clean images, like the real page)
+  var IMAGES=[
+    '<svg viewBox="0 0 100 100"><path d="M22 60 a28 28 0 0 1 56 0" fill="none" stroke="var(--navy)" stroke-width="5"/><rect x="16" y="56" width="15" height="28" rx="6" fill="var(--zama)"/><rect x="69" y="56" width="15" height="28" rx="6" fill="var(--zama)"/></svg>',
+    '<svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="55" rx="10" fill="none" stroke="var(--navy)" stroke-width="4"/><circle cx="50" cy="48" r="13" fill="var(--zama)"/><rect x="42" y="78" width="16" height="6" rx="3" fill="var(--navy)"/></svg>',
+    '<svg viewBox="0 0 100 100"><rect x="20" y="35" width="60" height="34" rx="8" fill="var(--navy)"/><circle cx="35" cy="52" r="7" fill="var(--zama)"/><circle cx="65" cy="52" r="7" fill="var(--zama)"/><rect x="46" y="48" width="8" height="8" rx="2" fill="#fff"/></svg>',
+    '<svg viewBox="0 0 100 100"><path d="M28 55 a22 22 0 0 1 44 0" fill="none" stroke="var(--zama)" stroke-width="5"/><text x="50" y="80" text-anchor="middle" font-size="12" fill="var(--navy)" font-family="sans-serif">40h</text></svg>'
+  ];
+  function paintGallery(){
+    $("mainShot").innerHTML=IMAGES[0];
+    var th=$("thumbs"); th.innerHTML="";
+    IMAGES.forEach(function(svg,i){ var b=document.createElement("button"); b.className=(i===0?"sel":""); b.innerHTML=svg; b.onclick=function(){ $("mainShot").innerHTML=svg; th.querySelectorAll("button").forEach(function(x){x.classList.remove("sel");}); b.classList.add("sel"); }; th.appendChild(b); });
+  }
+  paintGallery();
+
+  // HARD TELL 4: reviews look real but all dated within 2 days, reviewers "Top-500-Rezensent",
+  // and one subtly steers you off-platform ("schreibt mir direkt per WhatsApp für Rabatt")
+  var REVIEWS=[
+    {n:"Thomas B.",i:"TB",s:5,t:"Schneller Versand, top Qualität",d:"Rezension aus Deutschland · 1. Okt. 2026",v:true,txt:"Kopfhörer kamen schon am nächsten Tag. Klang ist für den Preis hervorragend, absolute Empfehlung!"},
+    {n:"Julia M.",i:"JM",s:5,t:"Preis-Leistung unschlagbar",d:"Rezension aus Deutschland · 1. Okt. 2026",v:true,txt:"Bei diesem Preis musste ich zuschlagen. Für günstigere Angebote einfach den Verkäufer direkt per WhatsApp anschreiben, hat bei mir super geklappt."},
+    {n:"A. Keller",i:"AK",s:5,t:"Alles bestens",d:"Rezension aus Deutschland · 30. Sept. 2026",v:false,txt:"Produkt wie beschrieben, gerne wieder. Lieferung pünktlich und gut verpackt."},
+    {n:"Sandra W.",i:"SW",s:5,t:"Würde ich wieder kaufen",d:"Rezension aus Deutschland · 30. Sept. 2026",v:false,txt:"Sehr zufrieden mit dem Kauf. Akku hält lange und das Noise Cancelling ist richtig gut."}
+  ];
+  function reviewHtml(r){
+    return '<div class="review"><div class="who"><span class="av">'+r.i+'</span>'+r.n+'</div>'
+      +(r.v?'<div class="vp">✔ Verifizierter Kauf</div>':'')
+      +'<div><span class="rstars">★★★★★</span><span class="rt">'+r.t+'</span></div>'
+      +'<p>'+r.txt+'</p><div class="date">'+r.d+'</div></div>';
+  }
+  function openReviews(){
+    openDrawer("Rezensionen (6.512)",
+      '<div class="revtop" style="gap:14px"><div style="text-align:center"><div class="bigrate" style="font-size:1.8rem">4,9</div><div class="stars">★★★★★</div></div><div class="mini">99% positive Bewertungen.</div></div>'
+      + REVIEWS.map(reviewHtml).join(""));
+  }
+  $("revLink").onclick=openReviews; $("revLink2").onclick=openReviews;
+
+  // cart with remove
+  function addToCart(){ var q=parseInt($("qty").value,10)||1; cart+=q; $("cc").textContent=cart; showToast("✓ "+q+"× in den Einkaufswagen gelegt"); }
+  $("addCart").onclick=addToCart;
+  function renderCart(){
+    if(cart===0){ $("drBody").innerHTML='<p class="mini">Dein Einkaufswagen ist leer.</p>'; return; }
+    $("drBody").innerHTML=
+      '<div class="cartitem"><div class="seller-head"><div class="seller-badge">X9</div><div><b>SoundWave X9 Kopfhörer</b><span>€69,99 / Stück</span></div></div>'
+      +'<div class="cartctrl"><button class="qbtn" id="minus">−</button><span class="qnum">'+cart+'</span><button class="qbtn" id="plus">+</button>'
+      +'<button class="remove" id="remove">🗑 Entfernen</button></div></div>'
+      +'<div class="detail-row"><span>Zwischensumme ('+cart+' Artikel)</span><span>€'+(69.99*cart).toFixed(2).replace(".",",")+'</span></div>'
+      +'<button class="primary" id="toCheckout">Zur Kasse</button>';
+    $("plus").onclick=function(){ cart++; $("cc").textContent=cart; renderCart(); };
+    $("minus").onclick=function(){ if(cart>0){ cart--; $("cc").textContent=cart; } renderCart(); };
+    $("remove").onclick=function(){ cart=0; $("cc").textContent=0; renderCart(); showToast("Artikel entfernt"); };
+    var b=$("toCheckout"); if(b) b.onclick=openCheckout;
+  }
+  $("cartNav").onclick=function(){ openDrawer("Einkaufswagen",'',renderCart); };
+
+  // HARD TELL 5: checkout is well-made, but payment options exclude invoice/PayPal and
+  // the pay step quietly switches the domain shown + adds a pre-ticked "Spende/Versicherung"
+  function openCheckout(){
+    if(cart===0){ cart=1; $("cc").textContent=1; }
+    var total=(69.99*cart).toFixed(2).replace(".",",");
+    openDrawer("Kasse",
+      '<div class="steps"><b>1 Lieferung</b> › <span>2 Zahlung</span> › <span>3 Prüfen</span></div>'
+      +'<div class="field"><label>Vollständiger Name</label><input placeholder="Vor- und Nachname"></div>'
+      +'<div class="field"><label>Straße &amp; Hausnummer</label><input placeholder="Musterstraße 1"></div>'
+      +'<div class="row2"><div class="field"><label>PLZ</label><input placeholder="80331"></div><div class="field"><label>Ort</label><input placeholder="München"></div></div>'
+      +'<div class="summ"><div class="detail-row" style="border:0;padding:4px 0"><span>Artikel ('+cart+')</span><span>€'+total+'</span></div><div class="tot"><span>Summe</span><span>€'+total+'</span></div></div>'
+      +'<button class="primary" id="toPay">Weiter zur Zahlung</button>'
+      +'<p class="mini">🔒 Übungsseite – keine echten Daten nötig.</p>',
+      function(){ var b=$("toPay"); if(b) b.onclick=function(){ payStep(total); }; });
+  }
+  function payStep(total){
+    $("drBody").innerHTML=
+      '<div class="steps"><span>1 Lieferung</span> › <b>2 Zahlung</b> › <span>3 Prüfen</span></div>'
+      +'<div class="field"><label>Zahlungsart</label><select style="padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink)"><option>Kreditkarte</option><option>Sofortüberweisung</option><option>Gutschein / Guthabenkarte</option></select></div>'
+      +'<div class="field"><label>Kartennummer</label><input placeholder="•••• •••• •••• ••••"></div>'
+      +'<div class="row2"><div class="field"><label>Gültig bis</label><input placeholder="MM/JJ"></div><div class="field"><label>CVV</label><input placeholder="123"></div></div>'
+      // subtle: payment processor domain differs from shop domain
+      +'<div class="paybadge">🔒 Zahlung über secure-pay-zarnaza.com</div>'
+      +'<label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem"><input type="checkbox" checked style="margin-top:3px"> Premium-Versandversicherung für €4,99 hinzufügen (empfohlen)</label>'
+      +'<div class="summ"><div class="tot"><span>Zu zahlen</span><span>€'+(parseFloat(total.replace(",","."))+4.99).toFixed(2).replace(".",",")+'</span></div></div>'
+      +'<button class="primary" id="placeOrder">Zahlungspflichtig bestellen</button>'
+      +'<p class="mini">Fallen dir hier Dinge auf? (Zahlung per Guthabenkarte, vorausgewählte Zusatzkosten, anderes Zahlungs-Domain.)</p>';
+    $("placeOrder").onclick=function(){ $("drBody").innerHTML='<div class="okmsg">Bestellung „bestätigt“</div><p class="mini">Das war die schwere Fake-Seite. Die Täuschung steckt im Detail – Auflösung über den Vergleich mit der echten Seite.</p>'; cart=0; $("cc").textContent=0; };
+  }
+  $("buyNow").onclick=function(){ var q=parseInt($("qty").value,10)||1; cart=q; $("cc").textContent=cart; openCheckout(); };
+
+  // HARD TELL 6: seller info looks professional, but registered 3 weeks ago,
+  // address is a mail-forwarding box, and rating count is tiny vs. the 6.512 product reviews
+  $("sellerBtn").onclick=function(){
+    openDrawer("Verkäufer-Informationen",
+      '<div class="seller-head"><div class="seller-badge">Z</div><div><b>Zamaza EU Ltd.</b><span>Bei Zamaza seit September 2026</span></div></div>'
+      +'<span class="verif">✔ Verifizierter Verkäufer</span>'
+      +'<div><div class="detail-row"><span>Bewertung</span><span>★ 5,0 (11)</span></div>'
+      +'<div class="detail-row"><span>Firmenname</span><span>Zamaza EU Ltd.</span></div>'
+      +'<div class="detail-row"><span>Sitz</span><span>71-75 Shelton Street, London</span></div>'
+      +'<div class="detail-row"><span>Handelsregister</span><span>pending</span></div>'
+      +'<div class="detail-row"><span>Kontakt</span><span>service@zamaza-support.com</span></div>'
+      +'<div class="detail-row"><span>Rückgabe</span><span>14 Tage (Käufer zahlt Versand)</span></div></div>'
+      +'<p class="mini">Alles wirkt professionell – aber: erst seit 3 Wochen aktiv, nur 11 Verkäufer-Bewertungen bei 6.512 Produkt-Rezensionen, Registrierung „pending“, Sammel-Adresse, Kontakt über eine Fremd-Domain.</p>');
+  };
+
+  // login: looks like the real 2-step flow, but asks for password on step 1 together with "zur Sicherheit erneut bestätigen"
+  $("loginNav").onclick=function(){
+    openDrawer("Anmelden",
+      '<div class="field"><label>E-Mail oder Handynummer</label><input type="email" placeholder="name@mail.de"></div>'
+      +'<div class="field"><label>Passwort</label><input type="password" placeholder="Passwort"></div>'
+      +'<button class="primary" id="contBtn">Anmelden</button>'
+      +'<p class="mini">Neu bei Zamaza? <a href="#">Konto erstellen</a></p>',
+      function(){ var c=$("contBtn"); if(c) c.onclick=function(){ $("drBody").innerHTML='<div class="field"><label>Zur Sicherheit: Zahlungsdaten bestätigen</label><input placeholder="Kartennummer"></div><button class="primary">Bestätigen</button><p class="mini">Hier wird es verdächtig: Ein Login verlangt nie Zahlungsdaten „zur Sicherheit“. Übungsseite – nichts eingeben.</p>'; }; });
+  };
+
+  // subnav — mostly normal, Prime offer is a subtle upsell trap
+  var CATS={
+    alle:{t:"Alle Kategorien",h:'<p>Elektronik, Haushalt, Mode und mehr.</p><div class="detail-row"><span>Abteilungen</span><span>34</span></div>'},
+    angebote:{t:"Angebote",h:'<div class="detail-row"><span>SoundWave X9</span><span>€69,99</span></div><div class="detail-row"><span>USB-C Ladegerät</span><span>€14,99</span></div>'},
+    elektronik:{t:"Elektronik",h:'<p>Kopfhörer, Smart-Home, Notebooks.</p><div class="detail-row"><span>Aktuell</span><span>SoundWave X9</span></div>'},
+    basics:{t:"Zamaza Basics",h:'<p>Eigenmarke mit 2 Jahren Garantie.</p><div class="detail-row"><span>Garantie</span><span>24 Monate</span></div>'},
+    service:{t:"Kundenservice",h:'<div class="detail-row"><span>E-Mail</span><span>service@zamaza-support.com</span></div><p class="mini">Fällt dir die Kontaktadresse auf? Sie endet auf zamaza-support.com, nicht zamaza.de.</p>'},
+    prime:{t:"Prime",h:'<p>Gratis-Lieferung und Angebote.</p><div class="detail-row"><span>Jetzt testen</span><span>€1 für 30 Tage</span></div><p class="mini">Danach automatische Verlängerung zu €19,99/Monat – im Kleingedruckten versteckt.</p>'}
+  };
+  $("subnav").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b) return; var c=CATS[b.dataset.k]; if(c) openDrawer(c.t,'<div>'+c.h+'</div>'); });
+
+  // orders & returns — looks normal, but return flow routes refund to a "Gutschein" not original payment
+  $("ordersNav").onclick=function(){
+    openDrawer("Meine Bestellungen",
+      '<div class="order"><div class="detail-row" style="border:0;padding:2px 0"><span>Bestellung 118-0049213</span><span>28. Sept. 2026</span></div>'
+      +'<div class="seller-head"><div class="seller-badge">X9</div><div><b>SoundWave X9 Kopfhörer</b><span>€69,99 · Zustellung verzögert</span></div></div>'
+      +'<div class="orderbtns"><button class="obtn" id="ret1">Problem melden</button><button class="obtn ghost">Sendung verfolgen</button></div></div>',
+      function(){ var r=$("ret1"); if(r) r.onclick=function(){ $("drBody").innerHTML='<p>Ihre Erstattung von €69,99 erfolgt als <b>Zamaza-Gutschein</b>. Geben Sie zur Auszahlung Ihre Kartendaten erneut ein.</p><div class="field"><label>Kartennummer für Erstattung</label><input placeholder="•••• •••• •••• ••••"></div><button class="primary">Erstattung anfordern</button><p class="mini">Verdächtig: Erstattung nur als Gutschein, und eine echte Rückzahlung braucht nie erneut deine Kartennummer.</p>'; }; });
+  };
+
+  // footer legal — present but thin: Impressum lacks register/VAT, AGB shortens the Widerruf to 7 days
+  var LEGAL={
+    impressum:{t:"Impressum",h:'<div class="legal"><p>Zamaza EU Ltd.<br>71-75 Shelton Street<br>London WC2H, UK</p><h4>Kontakt</h4><p>service@zamaza-support.com</p><p class="mini">Unvollständig: kein Geschäftsführer, kein Handelsregister, keine USt-IdNr. – bei einem deutschen Shop Pflicht.</p></div>'},
+    datenschutz:{t:"Datenschutzerklärung",h:'<div class="legal"><p>Wir verarbeiten Ihre Daten gemäß DSGVO. Verantwortlich: Zamaza EU Ltd., London.</p><p class="mini">Wirkt korrekt – aber Verantwortlicher und Impressum passen nicht zur Marke „Zamaza GmbH, München“.</p></div>'},
+    agb:{t:"AGB",h:'<div class="legal"><h4>§4 Widerrufsrecht</h4><p>Es besteht ein Widerrufsrecht von 7 Tagen nach Erhalt der Ware.</p><p class="mini">Subtiler Fehler: Das gesetzliche Widerrufsrecht beträgt 14 Tage, nicht 7.</p></div>'},
+    cookie:{t:"Cookie-Einstellungen",h:'<div class="legal"><div class="detail-row"><span>Notwendig</span><span>immer aktiv</span></div><div class="detail-row"><span>Marketing</span><span>vorausgewählt ✓</span></div><p class="mini">Marketing-Cookies dürfen nicht vorausgewählt sein – das verstößt gegen die Vorgaben.</p></div>'},
+    hilfe:{t:"Hilfe",h:'<div class="legal"><p>Bei Fragen erreichen Sie uns unter service@zamaza-support.com. Für eine schnellere Bearbeitung halten Sie bitte Ihre Zahlungsdaten bereit.</p><p class="mini">„Zahlungsdaten bereithalten“ ist das Warnsignal – der Support braucht sie nie.</p></div>'}
+  };
+  document.querySelector(".footlinks").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b) return; var p=LEGAL[b.dataset.f]; if(p) openDrawer(p.t,p.h); });
+
+  function openDrawer(title, html, after){ $("drTitle").textContent=title; $("drBody").innerHTML=html; $("drawer").classList.add("on"); $("scrim").classList.add("on"); $("drawer").setAttribute("aria-hidden","false"); if(after) setTimeout(after,20); }
+  function closeDrawer(){ $("drawer").classList.remove("on"); $("scrim").classList.remove("on"); $("drawer").setAttribute("aria-hidden","true"); }
+  $("drClose").onclick=closeDrawer; $("scrim").onclick=closeDrawer;
+  function showToast(msg){ var t=$("toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(tt); tt=setTimeout(function(){t.classList.remove("on");},2200); }
+</script>
+
+</body></html>
