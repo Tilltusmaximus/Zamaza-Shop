@@ -1,1 +1,43 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zamaza – Simulation</title><style>body{font-family:Arial,sans-serif;background:#f4f6f8;display:grid;place-items:center;min-height:100vh;margin:0}.card{background:#fff;max-width:650px;padding:42px;border-radius:18px;box-shadow:0 12px 40px #0002;text-align:center}button{background:#111827;color:#fff;border:0;border-radius:10px;padding:14px 24px;font-size:16px;cursor:pointer}.note{color:#667085;font-size:14px;line-height:1.5}</style></head><body><div class="card"><h1>Zamaza – Website-Vergleich</h1><p>Öffne beide Versionen der Website und entscheide anschließend, welcher Version du vertrauen würdest.</p><p class="note">Simulation für Unterrichtszwecke. Keine echten Zahlungs- oder Zugangsdaten eingeben.</p><button onclick="openSites()">Beide Websites öffnen</button><p id="status" class="note"></p></div><script>function openSites(){const a=window.open('Zamaza Shop.html','zamaza_real');const b=window.open('Zamaza Shop Pro.html','zamaza_fake');if(!a||!b){document.getElementById('status').textContent='Mindestens ein Tab wurde vom Browser blockiert. Bitte Popups für diese Seite erlauben.';}else{document.getElementById('status').textContent='Beide Versionen wurden geöffnet. Vergleicht sie sorgfältig.';}}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Websites</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+    a {
+      display: inline-block;
+      padding: 16px 28px;
+      background: #111827;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+    a:hover {
+      background: #1f2937;
+    }
+  </style>
+</head>
+<body>
+  <a href="#" onclick="openSites(); return false;">Open both websites</a>
+
+  <script>
+    function openSites() {
+      window.open('real.html', 'zamaza_real');
+      window.open('fake.html', 'zamaza_fake');
+    }
+  </script>
+</body>
+</html>

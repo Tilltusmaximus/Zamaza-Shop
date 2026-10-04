@@ -1,20 +1,16 @@
-ZAMAZA BRAND-IMPERSONATION-SIMULATION
+Zamaza Brand Impersonation Simulation
 
-index.html = Startseite; öffnet real.html und fake.html in zwei Tabs
-real.html  = bereitgestellte Zamaza Shop.html
-fake.html  = bereitgestellte Zamaza Shop Pro.html
+Files:
+- index.html  = landing page with one English link
+- real.html   = genuine example website
+- fake.html   = fake example website
 
-LOKAL TESTEN:
-python -m http.server 8000
-Dann http://localhost:8000/
+For GitHub Pages:
+1. Upload all three HTML files to the root of your repository.
+2. Enable Settings > Pages > Deploy from a branch > main > / (root).
+3. Open the generated GitHub Pages URL.
 
-ONLINE:
-Die vier Dateien können auf einem statischen Hosting-Dienst wie GitHub Pages,
-Netlify oder Cloudflare Pages veröffentlicht werden. Keine Serverlogik nötig.
-Bei GitHub Pages: Repository erstellen -> Dateien hochladen -> Settings -> Pages
--> Deploy from branch -> main/root. Danach die erzeugte Pages-Adresse teilen.
+The landing page attempts to open both example websites in separate tabs/windows.
+If the browser blocks one of them, allow pop-ups for the GitHub Pages site.
 
-Hinweis: Browser können den zweiten Tab als Popup blockieren. Popups für die
-Hosting-Domain erlauben. Beide window.open-Aufrufe werden durch denselben Button-Klick ausgelöst.
-
-Für die Unterrichtssimulation keine echten Zahlungs-, Konto- oder Passwortdaten eingeben.
+Use only for classroom/educational purposes. Do not enter real credentials or payment data.
